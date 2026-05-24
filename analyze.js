@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const API_KEY = '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';
+  const API_KEY = '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';
 
   try {
     const { image, mediaType } = req.body;
