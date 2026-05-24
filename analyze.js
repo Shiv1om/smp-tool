@@ -20,8 +20,15 @@ export default async function handler(req, res) {
       body: JSON.stringify(req.body)
     });
 
-    const data = await response.json();
-    return res.status(response.status).json(data);
+    const text = await response.text();
+    
+    try {
+      const data = JSON.parse(text);
+      return res.status(response.status).json(data);
+    } catch(e) {
+      return res.status(500).json({ error: 'Bad response from Anthropic', raw: text.slice(0, 500) });
+    }
+
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
